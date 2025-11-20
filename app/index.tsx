@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	View,
 	Text,
@@ -16,40 +16,52 @@ import Animated, {
 } from "react-native-reanimated";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { useAuth } from "@/store/AuthContext";
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function GetStarted() {
+	const { token } = useAuth();
+	const router = useRouter();
+
+	useEffect(() => {
+		if (token!==null) {
+			router.replace("/(tabs)"); // replaces instead of pushing
+		}
+	}, [token, router]);
+
+	if (token !== null) {
+		return null; // optional loader
+	}
 	const features = [
 		{
 			id: 1,
 			title: "Heart Rate",
 			subtitle: "Real-time BPM",
 			icon: Heart,
-			colors: ["#ef4444", "#ec4899"],
+			colors: ["#ef4444", "#ec4899"] as const,
 		},
 		{
 			id: 2,
 			title: "SpO2",
 			subtitle: "Oxygen Level",
 			icon: Activity,
-			colors: ["#3b82f6", "#06b6d4"],
+			colors: ["#3b82f6", "#06b6d4"] as const,
 		},
 		{
 			id: 3,
 			title: "Temperature",
 			subtitle: "Body Temp",
 			icon: Thermometer,
-			colors: ["#f97316", "#fbbf24"],
+			colors: ["#f97316", "#fbbf24"] as const,
 		},
 	];
-	const router = useRouter();
 
 	return (
 		<View style={styles.container}>
 			<StatusBar style="dark" />
 			<LinearGradient
-				colors={["#f0f9ff", "#ffffff", "#faf5ff"]}
+				colors={["#f0f9ff", "#ffffff", "#faf5ff"] as const}
 				style={styles.gradient}>
 				<ScrollView
 					contentContainerStyle={styles.scrollContent}
@@ -59,7 +71,7 @@ export default function GetStarted() {
 						style={styles.iconContainer}
 						entering={ZoomIn.duration(800)}>
 						<LinearGradient
-							colors={["#06b6d4", "#22d3ee", "#06b6d4"]}
+							colors={["#06b6d4", "#22d3ee", "#06b6d4"] as const}
 							style={styles.appIcon}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 1 }}>
@@ -81,7 +93,7 @@ export default function GetStarted() {
 						</Text>
 					</Animated.View>
 
-					{/* Features Cards */}
+					{/* Feature Cards */}
 					<View style={styles.featuresContainer}>
 						{features.map((feature, index) => {
 							const Icon = feature.icon;
@@ -104,6 +116,7 @@ export default function GetStarted() {
 												strokeWidth={2.5}
 											/>
 										</LinearGradient>
+
 										<View style={styles.featureText}>
 											<Text style={styles.featureTitle}>{feature.title}</Text>
 											<Text style={styles.featureSubtitle}>
@@ -125,13 +138,11 @@ export default function GetStarted() {
 							activeOpacity={0.8}
 							style={styles.ctaButtonWrapper}>
 							<LinearGradient
-								colors={["#06b6d4", "#22d3ee", "#06b6d4"]}
+								colors={["#06b6d4", "#22d3ee", "#06b6d4"] as const}
 								style={styles.ctaButton}
 								start={{ x: 0, y: 0 }}
 								end={{ x: 1, y: 0 }}>
-								<Text style={styles.ctaText}>
-									Start Tracking Now
-								</Text>
+								<Text style={styles.ctaText}>Start Tracking Now</Text>
 								<ArrowRight
 									size={22}
 									color="white"
@@ -158,7 +169,7 @@ const styles = StyleSheet.create({
 		padding: 20,
 		paddingTop: 50,
 		alignItems: "center",
-		width: '100%',
+		width: "100%",
 	},
 	iconContainer: {
 		marginBottom: 32,
@@ -178,7 +189,7 @@ const styles = StyleSheet.create({
 	titleContainer: {
 		alignItems: "center",
 		marginBottom: 1,
-		width: '100%',
+		width: "100%",
 		paddingHorizontal: 10,
 	},
 	title: {
@@ -197,11 +208,10 @@ const styles = StyleSheet.create({
 		fontFamily: "Lato-Regular",
 	},
 	featuresContainer: {
-		width: '100%',
+		width: "100%",
 		marginTop: 40,
 		marginBottom: 24,
 		gap: 12,
-		paddingHorizontal: 0,
 	},
 	featureCard: {
 		flexDirection: "row",
@@ -224,7 +234,6 @@ const styles = StyleSheet.create({
 		borderRadius: 12,
 		alignItems: "center",
 		justifyContent: "center",
-		flexShrink: 0,
 	},
 	featureText: {
 		flex: 1,
@@ -241,27 +250,26 @@ const styles = StyleSheet.create({
 	},
 	ctaContainer: {
 		marginTop: 40,
-		width: '100%',
-		paddingHorizontal: 0,
+		width: "100%",
 	},
 	ctaButtonWrapper: {
-		width: '100%',
+		width: "100%",
 		borderRadius: 16,
-		overflow: 'hidden',
+		overflow: "hidden",
 	},
 	ctaButton: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'center',
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
 		paddingVertical: 18,
 		paddingHorizontal: 20,
 		gap: 12,
 	},
 	ctaText: {
 		fontSize: SCREEN_WIDTH < 375 ? 16 : 18,
-		fontWeight: '700',
-		color: 'white',
-		fontFamily: 'Lato-Bold',
+		fontWeight: "700",
+		color: "white",
+		fontFamily: "Lato-Bold",
 		flexShrink: 1,
 	},
 });
