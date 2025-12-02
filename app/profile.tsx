@@ -90,6 +90,8 @@ export default function ProfileScreen() {
 		await AsyncStorage.removeItem("token");
 		setToken(null); 
         refreshToken()
+		router.dismissAll()
+		router.replace("/(auth)/LoginScreen")
 	};
 
 	const handleLogout = () => {

@@ -1,40 +1,38 @@
-import { Image } from "expo-image";
-import {
-	StyleSheet,
-	TouchableOpacity,
-	View,
-	ScrollView,
-	Animated,
-	ActivityIndicator,
-	Text,
-	Dimensions,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import { useAuth } from "@/store/AuthContext";
-import { RFValue } from "react-native-responsive-fontsize";
-import { WebView } from "react-native-webview";
-import * as Location from "expo-location";
-import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
+import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
+import * as Location from "expo-location";
+import { useEffect, useRef, useState } from "react";
+import {
+	ActivityIndicator,
+	Animated,
+	ScrollView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View
+} from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { WebView } from "react-native-webview";
 
 // Lucide Icons
+import { useRouter } from "expo-router";
 import {
 	Activity,
-	Wifi,
-	Droplets,
 	Bluetooth,
 	ChevronRight,
-	Zap,
+	Clock,
+	Droplets,
+	Gauge,
 	Thermometer,
 	TrendingUp,
-	Clock,
+	Wifi,
 	X,
-	Gauge, // Added for PSI
+	Zap,
 } from "lucide-react-native";
-import { useRouter } from "expo-router";
-import { RefreshTokenRequest } from "expo-auth-session/build/TokenRequest";
 
 // Assets
 const esp32Image = require("@/assets/images/esp32s2.png");
@@ -170,7 +168,7 @@ export default function HomeScreen() {
 		<SafeAreaView style={styles.container}>
 			<Header
 				name={data?.user.name || "User"}
-				profilePic={data?.user.profilePic}
+				profilePic={data?.user.profilePhoto}
 			/>
 
 			<View style={{ flex: 1 }}>

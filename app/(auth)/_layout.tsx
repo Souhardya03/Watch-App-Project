@@ -7,15 +7,15 @@ export default function RootLayout() {
 	const { token } = useAuth();
 	const router = useRouter();
 
-	useEffect(() => {
-		if (token !== null) {
-			router.replace("/(tabs)"); // replaces instead of pushing
-		}
-	}, [token, router]);
+	// useEffect(() => {
+	// 	if (token !== null) {
+	// 		router.replace("/(main)"); // replaces instead of pushing
+	// 	}
+	// }, [token, router]);
 
-	if (token !== null) {
-		return null; // optional loader
-	}
+	// if (token !== null) {
+	// 	return null; // optional loader
+	// }
 	return (
 		<Stack>
 			<Stack.Screen

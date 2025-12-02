@@ -20,7 +20,7 @@
 			},
 			"edgeToEdgeEnabled": true,
 			"predictiveBackGestureEnabled": false,
-			"package": "com.darkwarrior20.project",
+			"package": "com.darkwarrior20.project"
 		},
 		"web": {
 			"output": "static",

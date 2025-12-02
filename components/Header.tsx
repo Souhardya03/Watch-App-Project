@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({ name, profilePic }) => {
 
 			<TouchableOpacity
 				activeOpacity={0.8}
-				onPress={() => router.push("/(tabs)/Notification")}
+				onPress={() => router.push("/(main)/Notification")}
 				style={styles.notifButton}>
 				<Bell
 					size={24}

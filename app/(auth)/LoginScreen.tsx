@@ -173,7 +173,7 @@ export default function LoginScreen() {
     const handleSuccessfulAuth = async (token: string) => {
         await AsyncStorage.setItem("token", token);
         await refreshToken(); // Ensure global state updates
-        router.replace("/(tabs)"); // Use replace to prevent going back
+        router.replace("/(main)"); // Use replace to prevent going back
     };
 
     // Standard Email/Password Login

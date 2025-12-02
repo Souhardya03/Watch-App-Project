@@ -163,7 +163,7 @@ export default function RegisterScreen() {
 				refreshToken();
 				router.dismissAll();
 
-				router.push("/(tabs)");
+				router.push("/(main)");
 				return;
 			}
 
@@ -176,7 +176,7 @@ export default function RegisterScreen() {
 					refreshToken();
 					router.dismissAll();
 
-					router.push("/(tabs)");
+					router.push("/(main)");
 				} else {
 					Alert.alert(
 						"Registration Failed",
@@ -197,7 +197,7 @@ export default function RegisterScreen() {
 					router.dismissAll();
 
 					refreshToken();
-					router.push("/(tabs)");
+					router.push("/(main)");
 				}
 			} catch (regErr) {
 				console.log("Registration error:", regErr);
@@ -246,7 +246,7 @@ export default function RegisterScreen() {
 				refreshToken();
 				router.dismissAll();
 
-				router.push("/(tabs)");
+				router.push("/(main)");
 			}
 		} catch (error) {
 			console.log(error);
